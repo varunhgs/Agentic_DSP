@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SANITIZED, SYNTHETIC fixture. Not a capture of the live system.
+  Shaped after the FPO transformation 2 (ZD_CRMFP → ZC_CRM12: aDSO → aDSO, HANA runtime,
+  direct + time + formula rules, SUM aggregation), which was inspected live earlier but whose
+  XML was not retained. Element and attribute layout follow the BW/4HANA 2.0 transformation
+  XML as parsed by src/tools/trfn_logic.ts. Field names, the formula and the constant are
+  invented; the real field list and the real eight time/formula rules must be read again
+  from BW before the real flow is generated.
+-->
+<trfn:transformation name="0FPOSANITIZEDTRANSFORMATION00002" description="ZD_CRMFP -&gt; ZC_CRM12 (sanitized)" HANARuntime="true" sapHANAExecutionPossible="POSSIBLE" abapProgram="GPFPOSANITIZED0000000000002" xmlns:trfn="http://www.sap.com/bw/modeling/trfn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<source id="0" name="ZD_CRMFP" type="ADSO"><segment id="1">
+<element posit="0001" key="true" name="ZFUNDPLAN" infoObjectName="ZFUNDPLAN"><inlineType name="CHAR" length="10"/></element>
+<element posit="0002" key="true" name="0CALDAY" infoObjectName="0CALDAY"><inlineType name="DATS" length="8"/></element>
+<element posit="0003" key="true" name="0CRM_PROD" infoObjectName="0CRM_PROD"><inlineType name="CHAR" length="32"/></element>
+<element posit="0004" key="false" name="0CURRENCY" infoObjectName="0CURRENCY"><inlineType name="CUKY" length="5"/></element>
+<element posit="0005" key="false" name="ZSTATUS" infoObjectName="ZSTATUS"><inlineType name="CHAR" length="1"/></element>
+<element posit="0006" key="false" name="ZAMOUNT" infoObjectName="ZAMOUNT"><inlineType name="CURR" precision="17" scale="2"/></element>
+<element posit="0007" key="false" name="0RECORDMODE" infoObjectName="0RECORDMODE"><inlineType name="CHAR" length="1"/></element>
+</segment></source>
+<target id="0" name="ZC_CRM12" type="ADSO"><segment id="1">
+<element posit="0001" key="true" name="ZFUNDPLAN" infoObjectName="ZFUNDPLAN"><inlineType name="CHAR" length="10"/></element>
+<element posit="0002" key="true" name="0CALMONTH" infoObjectName="0CALMONTH"><inlineType name="NUMC" length="6"/></element>
+<element posit="0003" key="true" name="0CALYEAR" infoObjectName="0CALYEAR"><inlineType name="NUMC" length="4"/></element>
+<element posit="0004" key="true" name="0CRM_PROD" infoObjectName="0CRM_PROD"><inlineType name="CHAR" length="32"/></element>
+<element posit="0005" key="true" name="0CURRENCY" infoObjectName="0CURRENCY"><inlineType name="CUKY" length="5"/></element>
+<element posit="0006" key="true" name="ZSTATGRP" infoObjectName="ZSTATGRP"><inlineType name="CHAR" length="4"/></element>
+<element posit="0007" key="true" name="ZSRCSYS" infoObjectName="ZSRCSYS"><inlineType name="CHAR" length="3"/></element>
+<element posit="0008" key="false" name="ZAMOUNT" infoObjectName="ZAMOUNT" aggregationType="SUM" aggregationBehavior="SUM"><inlineType name="CURR" precision="17" scale="2"/></element>
+<element posit="0009" key="false" name="0RECORDMODE" infoObjectName="0RECORDMODE"><inlineType name="CHAR" length="1"/></element>
+</segment></target>
+<group id="0" description="Standard Group" type="S">
+<rule description="" id="1"><source id="1"><elementRef>#///source/segment1/ZFUNDPLAN</elementRef></source><target id="1"><elementRef>#///target/segment1/ZFUNDPLAN</elementRef></target><step xsi:type="trfn:StepDirect" id="1" type="DIRECT" rank="MAIN"/></rule>
+<rule description="" id="2"><source id="1"><elementRef>#///source/segment1/0CALDAY</elementRef></source><target id="1"><elementRef>#///target/segment1/0CALMONTH</elementRef></target><step xsi:type="trfn:StepTime" id="1" type="TIME" rank="MAIN"/></rule>
+<rule description="" id="3"><source id="1"><elementRef>#///source/segment1/0CALDAY</elementRef></source><target id="1"><elementRef>#///target/segment1/0CALYEAR</elementRef></target><step xsi:type="trfn:StepTime" id="1" type="TIME" rank="MAIN"/></rule>
+<rule description="" id="4"><source id="1"><elementRef>#///source/segment1/0CRM_PROD</elementRef></source><target id="1"><elementRef>#///target/segment1/0CRM_PROD</elementRef></target><step xsi:type="trfn:StepDirect" id="1" type="DIRECT" rank="MAIN"/></rule>
+<rule description="" id="5"><source id="1"><elementRef>#///source/segment1/0CURRENCY</elementRef></source><target id="1"><elementRef>#///target/segment1/0CURRENCY</elementRef></target><step xsi:type="trfn:StepDirect" id="1" type="DIRECT" rank="MAIN"/></rule>
+<rule description="" id="6"><source id="1"><elementRef>#///source/segment1/ZSTATUS</elementRef></source><target id="1"><elementRef>#///target/segment1/ZSTATGRP</elementRef></target><step xsi:type="trfn:StepFormula" formula=" IF ( ZSTATUS = 'X' , 'CLSD' , 'OPEN' )" id="1" type="FORMULA" rank="MAIN"/></rule>
+<rule description="" id="7"><target id="1"><elementRef>#///target/segment1/ZSRCSYS</elementRef></target><step xsi:type="trfn:StepConstant" constant="CRM" id="1" type="CONSTANT" rank="MAIN"/></rule>
+<rule description="" id="8"><source id="1"><elementRef>#///source/segment1/ZAMOUNT</elementRef></source><target id="1"><elementRef>#///target/segment1/ZAMOUNT</elementRef></target><step xsi:type="trfn:StepDirect" id="1" type="DIRECT" rank="MAIN"/></rule>
+<rule description="" id="9"><source id="1"><elementRef>#///source/segment1/0RECORDMODE</elementRef></source><target id="1"><elementRef>#///target/segment1/0RECORDMODE</elementRef></target><step xsi:type="trfn:StepDirect" id="1" type="DIRECT" rank="MAIN"/></rule>
+</group>
+</trfn:transformation>

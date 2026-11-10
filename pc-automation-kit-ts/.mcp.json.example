@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "bw-pc-automation-mcp": {
+      "command": "node",
+      "args": ["C:/ABSOLUTE/PATH/TO/pc-automation-kit-ts/dist/stdio.js"],
+      "env": {
+        "BW_URL": "https://<host>:<https-port>",
+        "BW_USER": "<sap user>",
+        "BW_PASSWORD": "<password>",
+        "BW_CLIENT": "100",
+        "BW_LANGUAGE": "EN"
+      }
+    }
+  }
+}

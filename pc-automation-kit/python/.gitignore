@@ -1,0 +1,4 @@
+.env
+attempts.jsonl
+__pycache__/
+*.pyc

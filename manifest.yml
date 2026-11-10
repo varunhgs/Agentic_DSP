@@ -1,0 +1,40 @@
+---
+# SAP BTP Cloud Foundry deployment.
+#
+# Two supported topologies, chosen by the destination:
+#   Authentication=PrincipalPropagation + BW_PP_ENABLED=true  -> each user reaches BW as
+#     themselves; BW applies their own authorizations.
+#   Authentication=BasicAuthentication  + BW_PP_ENABLED unset -> all users share the
+#     destination's technical user; the MCP scopes are the only per-user control.
+#
+# See docs/CLOUD-FOUNDRY.md for the full setup.
+applications:
+  - name: bw-modeling-mcp
+    memory: 512M
+    disk_quota: 1G
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    command: npm run start:http
+    health-check-type: http
+    health-check-http-endpoint: /health
+    env:
+      NODE_ENV: production
+      # BTP destination pointing at the BW system.
+      BW_BTP_DESTINATION: "BW4_NLB"
+      BW_CLIENT: "001"
+      BW_LANGUAGE: "DE"
+      # Per-user identity via Cloud Connector principal propagation. Requires CERTRULE
+      # and ICM trust on the ABAP side — see docs/CLOUD-FOUNDRY.md §3.
+      BW_PP_ENABLED: "true"
+      # Only when several Cloud Connectors serve this subaccount.
+      # BW_CC_LOCATION_ID: "bw-prod"
+      # Public route, if behind a reverse proxy that rewrites Host.
+      # BW_PUBLIC_URL: "https://bw-modeling-mcp.example.com"
+      # CORS, only for browser-based MCP clients. Native clients do not need it.
+      # BW_ALLOWED_ORIGINS: "https://claude.ai"
+    services:
+      - bwmcp-xsuaa
+      - bwmcp-destination
+      # Only needed for an on-premise BW behind the Cloud Connector.
+      - bwmcp-connectivity

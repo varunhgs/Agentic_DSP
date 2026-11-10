@@ -1,0 +1,9 @@
+.git/
+node_modules/
+src/
+tests/
+scripts/
+docs/
+payloads/
+tsconfig.json
+*.md

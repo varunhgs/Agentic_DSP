@@ -1,0 +1,2 @@
+pyrfc        # needs SAP NW RFC SDK installed (SAPNWRFC_HOME)
+requests     # only for http_session.py (alternative)

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "bw-modeling-mcp": {
+      "command": "node",
+      "args": ["<path-to-repo>/dist/stdio.js"],
+      "env": {
+        "BW_URL": "https://<bw-host>:<port>",
+        "BW_USER": "<user>",
+        "BW_PASSWORD": "<password>",
+        "BW_CLIENT": "100",
+        "BW_LANGUAGE": "EN"
+      }
+    }
+  }
+}

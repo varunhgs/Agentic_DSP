@@ -1,0 +1,54 @@
+{
+  "name": "bw-modeling-mcp",
+  "version": "1.3.0",
+  "description": "MCP server for agentic AI-assisted development in SAP BW/4HANA",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "bw-modeling-mcp": "dist/stdio.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "sap",
+    "bw",
+    "bw4hana",
+    "mcp",
+    "model-context-protocol",
+    "agentic-ai",
+    "abap"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/stdio.js",
+    "dev": "tsc && node dist/stdio.js",
+    "start:http": "node dist/http.js",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@arc-mcp/xsuaa-auth": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "axios": "^1.7.0",
+    "express": "^5.2.1",
+    "fast-xml-parser": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnic-dev/bw-modeling-mcp.git"
+  },
+  "author": "David Nicolay",
+  "license": "MIT"
+}

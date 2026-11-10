@@ -1,0 +1,45 @@
+{
+  "_source": "Key structure of transformation flow Tf_adj_qty (DEMO_SPACE_1), read 2026-10-23; keys only, no values",
+  "kind": "sap.dis.transformationflow",
+  "contents": [
+    "properties",
+    "metadata",
+    "parameters",
+    "description",
+    "processes",
+    "groups",
+    "connections",
+    "inports",
+    "outports"
+  ],
+  "metadata": [
+    "loadType"
+  ],
+  "sqltransformConfig": [
+    "name",
+    "definition",
+    "version",
+    "meta",
+    "$version"
+  ],
+  "sqltransformDefinition": [
+    "kind",
+    "elements",
+    "query",
+    "@ObjectModel.supportedCapabilities",
+    "@EndUserText.label",
+    "@ObjectModel.modelingPattern",
+    "@DataWarehouse.consumption.external",
+    "@DataWarehouse.sqlEditor.query"
+  ],
+  "targetConfig": [
+    "attributeMappings",
+    "definition",
+    "name",
+    "truncate"
+  ],
+  "connectionPorts": [
+    "outTable",
+    "inTable"
+  ]
+}
